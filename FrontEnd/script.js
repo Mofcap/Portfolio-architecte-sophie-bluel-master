@@ -74,8 +74,9 @@ document.addEventListener("DOMContentLoaded", function() {
   // Fonction pour générer les éléments de la galerie
   function genererGalerie(works) {
     const galerie = document.querySelector(".gallery");
-    
+    const photomodif = document.querySelector(".photo");
     galerie.innerHTML = ''; // Vide la galerie avant de la remplir
+    photomodif.innerHTML='';
     works.forEach(work => {
       const workElement = document.createElement("figure");
       workElement.innerHTML = `
@@ -83,6 +84,15 @@ document.addEventListener("DOMContentLoaded", function() {
         <p>${work.title}</p>
       `;
       galerie.appendChild(workElement);
+      const photoElement = document.createElement("figure");
+                photoElement.style.position="relative";
+                photoElement.style.display="inline-block";
+                photoElement.innerHTML = `
+                  <img src="${work.imageUrl}" alt="${work.title}" style="width: 100%; height: 100%;">
+                  <i class="fa-solid fa-trash-can remove" data-id="${work.id}" style="position: absolute; top: 5px; right: 5px; background-color: black; color: white; padding: 5px;"></i>
+                `;
+                photomodif.appendChild(photoElement);      
+              
     });
   }
 
@@ -115,6 +125,18 @@ document.addEventListener("DOMContentLoaded", function() {
       galerie.appendChild(workElement);
     });
   }
+
+
+  //button appeler module
+  
+  const modifier = document.querySelector("#buttonmodifier");
+
+  modifier.addEventListener("click" , function () {
+    const module = document.querySelector(".modale");
+    module.style.display = "block";
+    
+  });
+
 });
 
 

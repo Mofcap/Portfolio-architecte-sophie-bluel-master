@@ -52,6 +52,7 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	
 }
 header {
 	display: flex;
@@ -206,4 +207,53 @@ button{
 .out{
 	display: none;
 }
+.modale{
+	display: none;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	margin-top: -35.2%;
+	
+	background-color: #00000030;
+}
+.modalcontent{
+	
+	display:flex;
+	 flex-direction:column;
+	 text-align: center;
+	 width: 40%;
+	 height: 70fr;
+	 margin: 5% 30%;
+	 
+	 background-color: white;
 
+    
+}
+.modalchang{
+	display: flex;
+	 flex-direction: row-reverse;
+	 justify-content: space-between;
+}
+.close{
+	width: 50px;
+	padding-top: 20px;
+}
+.photo{
+	margin:8% 20% 0% 20%;
+	padding-bottom: 8%;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  border-bottom: solid 3px black;
+}
+#ajouterphoto{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	 background-color: #1D6154;
+	margin : 2em auto ;
+	height: 39px;
+	 width: 40%; 
+	 text-align: center;
+	 border-radius: 60px ;
+}
