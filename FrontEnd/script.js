@@ -89,9 +89,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 photoElement.style.display="inline-block";
                 photoElement.innerHTML = `
                   <img src="${work.imageUrl}" alt="${work.title}" style="width: 100%; height: 100%;">
-                  <i class="fa-solid fa-trash-can remove" data-id="${work.id}" style="position: absolute; top: 5px; right: 5px; background-color: black; color: white; padding: 5px;"></i>
-                `;
-                photomodif.appendChild(photoElement);      
+                  <i class="fa-solid fa-trash-can remove" data-id="${work.id}" style="position: absolute;top: 5px;right: 5px;background-color: black;color: white;padding: 5px;" ></i>
+                  `;
+                photomodif.appendChild(photoElement);
+                const removeIcons = document.querySelectorAll(".remove");
+                removeIcons.forEach(icon => {
+                  icon.addEventListener("click", function() {
+                    const id = this.getAttribute("data-id");
+                    deleteWork(id);
+                  });
+                });     
               
     });
   }
@@ -125,7 +132,45 @@ document.addEventListener("DOMContentLoaded", function() {
       galerie.appendChild(workElement);
     });
   }
+// Ajout des écouteurs d'événements pour les icônes de suppression
 
+
+
+
+   // function suppression 
+
+
+   async function deleteWork(id) {
+    console.log(`Attempting to delete work with id: ${id}`); // Debugging log
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error("Token is not available.");
+      return;
+    }
+    console.log(`Token being used: ${token}`); // Debugging log
+
+    try {
+      const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log(response); // Log the response
+
+      if (!response.ok) {
+        throw new Error(`HTTP error, status: ${response.status}`);
+      }
+
+      // Successfully deleted
+      document.querySelector(`.remove[data-id="${id}"]`).parentElement.remove();
+      console.log('Element removed from DOM');
+    } catch (error) {
+      console.error("An error occurred during deletion:", error);
+    }
+  }
 
   //button appeler module
   
