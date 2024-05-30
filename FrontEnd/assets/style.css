@@ -234,7 +234,7 @@ button{
 	 flex-direction: row-reverse;
 	 justify-content: space-between;
 }
-.close{
+#close{
 	width: 50px;
 	padding-top: 20px;
 }
@@ -256,4 +256,83 @@ button{
 	 width: 40%; 
 	 text-align: center;
 	 border-radius: 60px ;
+}
+.modalcontent form{
+	text-align: left;
+	
+	display: flex;
+	flex-direction: column;
+	 padding: 5% 10% 5% 10%;
+
+}
+.photElement{
+	text-align: center;
+	 display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	   background: #E8F1F6;
+	 height: 169px;
+}
+.photElement img {
+	height: 80%;
+}
+#image-label{
+	color: #306685;
+	 width: 60%;
+	border-radius: 50px;
+	height: 36px;
+	background-color: #CBD6DC;
+ font-family: Work Sans;
+	 font-size: 14px;
+	 font-weight: 500;
+	 display: flex;
+	 align-items: center;
+	 justify-content: center;
+	 cursor: pointer;
+}
+.photElement p{
+	font-family: Work Sans;
+	color: #444444;
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 11.73px;
+	text-align: center;
+	height: 12px;
+
+}
+.formulair {
+	display: flex; 
+	flex-direction: column;
+	gap:10px;
+	padding-bottom:60px; 
+	border-bottom: black solid 1px;
+}
+.formulair label {
+	font-family: Work Sans;
+	font-size: 14px; 
+	font-weight: 500;
+	line-height: 16.42px;
+	text-align: left;
+}
+.formulair input{
+	height: 51px;
+	font-size: 1.2em; 
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.formulair select {
+	height: 51px;
+	font-size: 1.2em;
+	border: none;
+	background-color: #fff;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#buttonajout {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #A7A7A7;
+	Height: 36px;
+	text-align: center; 
+	border-radius: 60px;
 }
