@@ -21,9 +21,10 @@ clos.addEventListener("click", function () {
  function returnmodal (){
     modal1.style.display = "block";
     modal2.style.display = "none";
+    
      }
 btnret.addEventListener("click", returnmodal );
 
-
+ 
 
 

@@ -207,6 +207,16 @@ button{
 .out{
 	display: none;
 }
+.h2modif{
+	display: inline-flex;
+}
+#buttonmodifier{
+	color: black;
+	border: none;
+	background-color: #fff;
+	font-weight: 400;
+	
+}
 .modale{
 	display: none;
 	position: fixed;
@@ -238,13 +248,17 @@ button{
 	width: 50px;
 	padding-top: 20px;
 }
+.pervieu{
+	width: 50px;
+	padding-top: 20px;
+}
 .photo{
 	margin:8% 20% 0% 20%;
-	padding-bottom: 8%;
+	padding-bottom: 15%;
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
   gap: 10px;
-  border-bottom: solid 3px black;
+  border-bottom: solid 1px black;
 }
 #ajouterphoto{
 	font-family: 'Syne';
@@ -271,10 +285,12 @@ button{
 	  flex-direction: column;
 	  align-items: center;
 	   background: #E8F1F6;
-	 height: 169px;
+	 height: 190px;
+	 margin-top: -20px;
 }
+
 .photElement img {
-	height: 80%;
+	height: 70%;
 }
 #image-label{
 	color: #306685;
