@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+
   const login = document.querySelector(".in");
   const logout = document.querySelector(".out");
   const buttonmodifier = document.querySelector("#buttonmodifier");
@@ -130,35 +131,48 @@ document.addEventListener("DOMContentLoaded", function() {
   async function deleteWork(id) {
     const token = localStorage.getItem('token');
     if (!token) {
-      console.error("Token is not available.");
-      return;
+        console.error("Token is not available.");
+        return;
     }
-    
+
     try {
-      const response = await fetch(`http://localhost:5678/api/works/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+        const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error, status: ${response.status}`);
         }
-      });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error, status: ${response.status}`);
-      }
+        // Supprimer immédiatement l'élément du DOM
+        document.querySelector(`.remove[data-id="${id}"]`).parentElement.remove();
 
-      document.querySelector(`.remove[data-id="${id}"]`).parentElement.remove();
-      console.log('Element removed from DOM');
+        // Récupérer les travaux mis à jour et régénérer la galerie
+        const newResponse = await fetch("http://localhost:5678/api/works");
+        if (!newResponse.ok) {
+            throw new Error("Erreur HTTP, statut " + newResponse.status);
+        }
+
+        const works = await newResponse.json();
+        genererGalerie(works);
+
+        alert(`Vous avez correctement supprimé l'élément avec l'ID ${id}`);
     } catch (error) {
-      console.error("An error occurred during deletion:", error);
+        console.error("An error occurred during deletion:", error);
     }
   }
 
   async function ajouterwork() {
+    const form = document.querySelector("#ajoutPhotoForm");
     const title = document.getElementById("titre").value;
     const categoryId = document.getElementById("categorie").value;
     const imageInput = document.getElementById("imageinput");
     const buttajou = document.querySelector("#buttonajout");
+    const token = localStorage.getItem('token');
 
     if (!imageInput || !imageInput.files.length) {
       console.error("No file selected.");
@@ -171,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function() {
     formData.append("title", title);
     formData.append("category", categoryId);
     formData.append("image", image);
-  
+
     try {
       const response = await fetch("http://localhost:5678/api/works", {
         method: "POST",
@@ -194,12 +208,27 @@ document.addEventListener("DOMContentLoaded", function() {
       works = await newResponse.json();
       genererGalerie(works);
 
+      // Réinitialiser le formulaire après l'ajout de la photo
+      form.reset();
+      
+      // Réinitialiser l'aperçu de la photo
+      const photoElement = document.querySelector("#photoPreview");
+      const planphoto = document.querySelector(".planphoto");
+      const imagelabel = document.querySelector("#image-label");
+      const parag = document.querySelector(".parag");
+      photoElement.style.display = "none"; 
+      photoElement.src = ""; // Réinitialiser la source de l'image
+      imageInput.style.display = "block"; 
+      imageInput.style.display = "none"; // Cacher l'input de type file après réinitialisation
+      planphoto.style.display = "block"; 
+      imagelabel.style.display = "block"; 
+      parag.style.display = "block";
+
     } catch (error) {
       console.error("An error occurred while adding the work:", error);
     }
   }
-
-  // Fonction pour afficher l'aperçu de la photo
+  
 
   function previewPhoto() {
     const imageInput = document.getElementById("imageinput");
@@ -210,6 +239,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const buttajou = document.querySelector("#buttonajout");
     const imagelabel = document.querySelector("#image-label");
     const parag = document.querySelector(".parag");
+
     if (imageInput.files && imageInput.files[0]) {
       const reader = new FileReader();
 
@@ -230,19 +260,26 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
+  // Ajouter l'événement de prévisualisation sur les entrées du formulaire
   document.getElementById("titre").addEventListener("input", previewPhoto);
   document.getElementById("categorie").addEventListener("change", previewPhoto);
   document.getElementById("imageinput").addEventListener("change", previewPhoto);
 
+  // Ajouter l'événement de soumission sur le formulaire
   const form = document.querySelector("#ajoutPhotoForm");
   form.addEventListener("submit", function(event) {
     event.preventDefault();
     ajouterwork();
   });
 
+  // Ajouter l'événement d'ouverture de la modal
   const modifier = document.querySelector("#buttonmodifier");
-  modifier.addEventListener("click", function() {
-    const module = document.querySelector(".modale");
-    module.style.display = "block";
-  });
+  if (modifier) {
+    modifier.addEventListener("click", function() {
+      const module = document.querySelector(".modale");
+      if (module) {
+        module.style.display = "block";
+      }
+    });
+  }
 });

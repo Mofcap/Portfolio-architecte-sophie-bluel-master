@@ -10,7 +10,8 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-	
+	<script src="script.js"  ></script>
+	<script src="module/module.js"  ></script>
 	
 </head>
 <body>
@@ -56,7 +57,7 @@
 				<div class="modalcontent" id="modal2" style="display: none;" >
 			
 					<div class="modalchang">
-						<i class="fa-solid fa-xmark " id="close"></i>
+						<i class="fa-solid fa-xmark " id="close-modal2" ></i>
 						<i class="fa-solid fa-arrow-left pervieu"></i>
 					</div>
 						  
@@ -64,8 +65,8 @@
 						  <form id="ajoutPhotoForm" >
 							<div class="photElement" >
 								<!-- Ajoutez ceci dans votre formulaire ou à un endroit approprié dans votre HTML -->
-                     <img id="photoPreview" src="" alt="Aperçu de l'image" style="height: 100%;" >
-								<img class="planphoto"  src="./assets/icons/image-regular.svg">
+                     <img  id="photoPreview" src="" alt="Aperçu de l'image" style="height: 100%; display: none;" >
+								<img  class="planphoto"  src="./assets/icons/image-regular.svg">
 							
 							
 						<label for="imageinput" id="image-label" >+ Ajouter photo</label>
@@ -125,7 +126,6 @@
 		</ul>
 	</nav>
 </footer>
-<script src="script.js"  ></script>
-	<script src="module/module.js"  ></script>
+
 </body>
 </html>
